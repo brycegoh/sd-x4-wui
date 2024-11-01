@@ -3,7 +3,7 @@ import upscaler
 import os
 from PIL import Image
 
-def upscale_image(prompt,negative_prompt, rows=3,seed=0, image=None,enable_custom_sliders=False,guidance=7,iterations=50,xformers_input=False,cpu_offload_input=False,attention_slicing_input=False):
+def upscale_image(prompt,negative_prompt, rows=1,seed=0, image=None,enable_custom_sliders=False,guidance=7,iterations=50,xformers_input=False,cpu_offload_input=False,attention_slicing_input=False):
     cols = rows
     output_image = upscaler.upscale_image(image, int(rows), int(cols),int(seed), prompt,negative_prompt,xformers_input,cpu_offload_input,attention_slicing_input,enable_custom_sliders,guidance,iterations)
     output_image_path = "result.png"
@@ -40,4 +40,4 @@ gr.Interface(fn=upscale_image,
                      attention_slicing_input],
              outputs=[output_image],
              title="Stable Diffusion x4 Upscaler - Web GUI",
-             allow_flagging=False).launch()
+             allow_flagging=False).launch(share=True)
